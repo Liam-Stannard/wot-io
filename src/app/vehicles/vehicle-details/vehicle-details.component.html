@@ -1,0 +1,53 @@
+<mat-card>
+    <mat-card-header>
+        {{ pageTitle + ': ' + vehicle?.name}}
+    </mat-card-header>
+    <mat-card-content *ngIf="vehicle">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">Name:</div>
+                    <div class="col-md-8">{{vehicle.name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Tier:</div>
+                    <div class="col-md-8">{{vehicle.tier}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Type:</div>
+                    <div class="col-md-8">{{vehicle.type}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Nation:</div>
+                    <div class="col-md-8">{{vehicle.nation}}</div>
+                </div>
+                <div *ngIf="nextVehicles && vehicle.tier !== 10">
+                    <div class="row">
+                        <div class="col-md-4">Next Tanks:</div>
+                    </div>
+                    <ul class="row">
+                        <li class="col-md-8" *ngFor="let nextVehicle of nextVehicles; index as i;" [routerLink]="['/vehicles', nextVehicle.tank_id]" >
+                            <div class="row">
+                                <div class="col-md-4">Name:</div>
+                                <div class="col-md-8">{{nextVehicle.name}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">Tier:</div>
+                                <div class="col-md-8">{{nextVehicle.tier}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img class=" 'center-block img-responsive" [style.width.px]="200" [style.margin.px]="2"
+                    [src]='vehicle.images.big_icon'>
+
+
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="onBack()">Back</button>
+    </mat-card-actions>
+</mat-card>
